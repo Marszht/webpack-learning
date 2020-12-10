@@ -1,0 +1,14 @@
+div:nth-of-type(odd) {
+  /* background-color: aqureda; */
+  /* background-color: red; */
+  background-color: springgreen;
+}
+
+.counter {
+  border: 1px solid springgreen;
+  width: 100px;
+  height: 109px;
+}
+body {
+  background-color: springgreen;
+}
