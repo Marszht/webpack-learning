@@ -1,7 +1,7 @@
 const commonWebpack = require('./webpack.config');
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 
 const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
 
@@ -38,15 +38,73 @@ const webpackConfig = {
     hot: true, // 自动刷新 开启 HMR
     // hotOnly: true, // 不自动 刷新 当 hmr 失效的时候 做特别处理 
   },
+  module: {
+    rules: [
+      {
+        test: /\.(sass|scss)$/i,
+        //  会从use 数组最后一个开始解析
+        use: [
+          // 把解析出来的 css 插入DOM 结构
+          'style-loader',
+          // 解析 import css url... Translates CSS into CommonJS
+          // 如果有自定义配置，需要 像下面 postcss-loader 使用一样
+          {
+            loader: 'css-loader',
+            options: {
+              // 就是在文件 css 文件中引入的 可能不会执行 
+              // sass-loader postcss-loader
+              modules: true, // 开启模块化打包
+              importLoaders: 2,  // 表示 在 css中import 的css会使用 scss 和 postcss-loader
+              //   // 使用 模块 用 css-module
+            }
+          },
+          // 自动加前缀
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              plugins: [
+                require('autoprefixer')(),
+              ]
+            }
+          },
+          // Compiles Sass to CSS
+          'sass-loader',
+        ]
+      },
+      {
+        test: /\.css$/i,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              // 就是在文件 css 文件中引入的 可能不会执行 
+              // sass-loader postcss-loader
+              modules: true, // 开启模块化打包
+              importLoaders: 2,  // 表示 在 css中import 的css会使用 scss 和 postcss-loader
+              //   // 使用 模块 用 css-module
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              plugins: [
+                require('autoprefixer')(),
+              ]
+            }
+          },
+        ]
+      },
+    ]
+  },
   // plugin
   // 回在运行在某刻的时候做一些事情
   // 会在打包结束后自动生成一个 html 文件，
   // 并把打包生成的js 文件自动引入到 html 文件中;
   plugins: [
-    new HtmlWebpackPlugin({
-      // 将 index.html 作为模板
-      template: './src/index.html'
-    }),
+
 
     new webpack.HotModuleReplacementPlugin() // HMR
   ],

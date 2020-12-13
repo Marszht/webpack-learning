@@ -2,6 +2,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const webpackCommonConfig = {
   // entry: ['@babel/polyfill', './src/index.js'],
@@ -84,63 +85,6 @@ const webpackCommonConfig = {
           }
         },
       },
-      {
-        test: /\.(sass|scss)$/i,
-        //  会从use 数组最后一个开始解析
-        use: [
-          // 把解析出来的 css 插入DOM 结构
-          'style-loader',
-          // 解析 import css url... Translates CSS into CommonJS
-          // 如果有自定义配置，需要 像下面 postcss-loader 使用一样
-          {
-            loader: 'css-loader',
-            options: {
-              // 就是在文件 css 文件中引入的 可能不会执行 
-              // sass-loader postcss-loader
-              modules: true, // 开启模块化打包
-              importLoaders: 2,  // 表示 在 css中import 的css会使用 scss 和 postcss-loader
-              //   // 使用 模块 用 css-module
-            }
-          },
-          // 自动加前缀
-          {
-            loader: 'postcss-loader',
-            options: {
-              ident: 'postcss',
-              plugins: [
-                require('autoprefixer')(),
-              ]
-            }
-          },
-          // Compiles Sass to CSS
-          'sass-loader',
-        ]
-      },
-      {
-        test: /\.css$/i,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              // 就是在文件 css 文件中引入的 可能不会执行 
-              // sass-loader postcss-loader
-              modules: true, // 开启模块化打包
-              importLoaders: 2,  // 表示 在 css中import 的css会使用 scss 和 postcss-loader
-              //   // 使用 模块 用 css-module
-            }
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              ident: 'postcss',
-              plugins: [
-                require('autoprefixer')(),
-              ]
-            }
-          },
-        ]
-      },
       // 打包字体
       {
         test: /\.(eot|ttf|woff|svg|woff2)$/i,
@@ -160,6 +104,10 @@ const webpackCommonConfig = {
         verbose: true,
       }
     ),
+    new HtmlWebpackPlugin({
+      // 将 index.html 作为模板
+      template: './src/index.html'
+    }),
   ],
   output: {
     // publicPath: '/', // cdn 地址放到对应
