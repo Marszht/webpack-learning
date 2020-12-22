@@ -2,6 +2,7 @@ const commonWebpack = require('./webpack.config');
 const { merge } = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+// const WorkboxPlugin = require('workbox-webpack-plugin');
 
 
 const webpackConfig = {
@@ -85,14 +86,35 @@ const webpackConfig = {
   plugins: [
     new MiniCssExtractPlugin({
       filename: 'style.css',
-      chunkFilename: '[name].style.[ext]'
-    })
+      chunkFilename: '[name].css'
+    }),
+    new WorkboxPlugin.GenerateSW({
+      // these options encourage the ServiceWorkers to get in there fast
+      // and not allow any straggling "old" SWs to hang around
+      clientsClaim: true,
+      skipWaiting: true,
+    }),
+    // new WorkboxPlugin.InjectManifest({
+    //   swSrc: './src/index.js'
+    // })
   ],
-  optimization: {
-    minimizer: [
-      new CssMinimizerPlugin(),
-    ]
-  }
+  // optimization: {
+  //   usedExports: true,
+  //   minimizer: [
+  //     new CssMinimizerPlugin(),
+  //   ],
+  //   splitChunks: {
+  //     cacheGroups: {
+  //       styles: {
+  //         name: 'styles',
+  //         test: /\.(css|sass)$/,
+  //         chunks: 'all',
+  //         enforce: true,
+  //       },
+  //     },
+  //   },
+
+  // }
 }
 
 module.exports = merge(webpackConfig, commonWebpack);

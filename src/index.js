@@ -99,20 +99,27 @@
 // })
 
 
-// import React, { PureComponent } from 'react';
+import React, { PureComponent } from 'react';
 
-// import ReactDom from 'react-dom';
+import ReactDom from 'react-dom';
+import axios from 'axios';
 
-// class App extends PureComponent {
-//   constructor () {
-//     super();
-//     this.state = {
-//       num:19
-//     }
-//   }
+class App extends PureComponent {
+  constructor () {
+    super();
+    this.state = {
+      num:19
+    }
+  }
 
-//   componentDidMount() {
-//   }
+  componentDidMount() {
+    // 允许了跨域
+    // 本地代理服务器 fideler 待会尝试一下
+    axios.get('/react/api/header.json')
+    .then(res => {
+      console.log({res});
+    })
+  }
 
 // onClick = () => {
 
@@ -121,16 +128,16 @@
 //     num: num++
 //   })
 // }
-//   render() {
-//     return (
-//       <div>Hello React
-//         <h1>{this.state.num}</h1>
-//       </div>
-//     )
-//   }
-// }
+  render() {
+    return (
+      <div>
+        Hello React
+      </div>
+    )
+  }
+}
 
-// ReactDom.render(<App />, document.getElementById('root'));
+ReactDom.render(<App />, document.getElementById('root'));
 
 /**
  * tree shaking 
@@ -201,4 +208,22 @@
 // var fuck = [1,2,3]
 // console.log(...fuck);
 
-import './style.css';
+// import './style.css';
+// import { add } from './math';
+// add(1,2);
+// console.log(this === window);
+
+// 库代码
+// console.log("work");
+
+// PWA 渐进式网页应用
+// if ('serviceWorker' in navigator) {
+//   window.addEventListener('load', () => {
+//     navigator.serviceWorker.register('/service-worker.js')
+//     .then(registration => {
+//       console.log('SW registered: ', registration);
+//     }).catch(registrationError => {
+//       console.log('SW registration failed: ', registrationError);
+//     });
+//   });
+// }

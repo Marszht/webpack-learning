@@ -33,10 +33,18 @@ const webpackConfig = {
     contentBase: './dist', // 启动在哪个文件夹下
     open: true, //  自动 开启浏览器 开启 服务器 如果以文件地址打开会有跨域问题， 或者发ajax 请求
     port: 3000, // 默认 8080
-    // proxy: '' // 接口代理，跨域 问题
+    proxy: {
+      '/react/api': {
+        target: 'http://www.dell-lee.com',
+        pathRewirte: {
+          'header.json': 'demo.json'
+        }
+      }
+      
+    }, // 接口代理，跨域 问题
     // HMR 只会刷新 你更改的内容
     hot: true, // 自动刷新 开启 HMR
-    // hotOnly: true, // 不自动 刷新 当 hmr 失效的时候 做特别处理 
+    hotOnly: true, // 不自动 刷新 当 hmr 失效的时候 做特别处理 
   },
   module: {
     rules: [
@@ -104,8 +112,6 @@ const webpackConfig = {
   // 会在打包结束后自动生成一个 html 文件，
   // 并把打包生成的js 文件自动引入到 html 文件中;
   plugins: [
-
-
     new webpack.HotModuleReplacementPlugin() // HMR
   ],
   // tree shakiing 生产不需要 这断代码
