@@ -60,24 +60,26 @@
 
 // css-loader 中已经 帮我们自己判断是否需要更新
 // HMR 
-// import './style.css';
+import style from './index.scss';
 
-// var btn = document.createElement('button');
-// btn.innerHTML = '新建';
-// document.body.appendChild(btn);
+console.log({style});
+var btn = document.createElement('button');
+btn.innerHTML = '新建';
+document.body.appendChild(btn);
 
-// btn.onclick = function () {
-//   var div = document.createElement('div');
-//   div.innerHTML = 'item';
-//   document.body.appendChild(div)
-// }
+btn.onclick = function () {
+  var div = document.createElement('div');
+  div.classList.add(style.avatar);
+  div.innerHTML = 'item';
+  document.body.appendChild(div);
+}
 
-// import { counter } from './conter';
-// import { number } from './number';
+import { counter } from './conter';
+import { number } from './number';
 
 // 页面不会刷新，如果只是单纯的加上 HMR
-// counter();
-// number();
+counter();
+number();
 
 // // HMR 代码 在一般的框架中以及做好了 所以我们不需要写 & 判断
 // if (module.hot) {
@@ -99,27 +101,27 @@
 // })
 
 
-import React, { PureComponent } from 'react';
+// import React, { PureComponent } from 'react';
 
-import ReactDom from 'react-dom';
-import axios from 'axios';
+// import ReactDom from 'react-dom';
+// import axios from 'axios';
 
-class App extends PureComponent {
-  constructor () {
-    super();
-    this.state = {
-      num:19
-    }
-  }
+// class App extends PureComponent {
+//   constructor () {
+//     super();
+//     this.state = {
+//       num:19
+//     }
+//   }
 
-  componentDidMount() {
-    // 允许了跨域
-    // 本地代理服务器 fideler 待会尝试一下
-    axios.get('/react/api/header.json')
-    .then(res => {
-      console.log({res});
-    })
-  }
+  // componentDidMount() {
+  //   // 允许了跨域
+  //   // 本地代理服务器 fideler 待会尝试一下
+  //   axios.get('/react/api/header.json')
+  //   .then(res => {
+  //     console.log({res});
+  //   })
+  // }
 
 // onClick = () => {
 
@@ -128,16 +130,16 @@ class App extends PureComponent {
 //     num: num++
 //   })
 // }
-  render() {
-    return (
-      <div>
-        Hello React
-      </div>
-    )
-  }
-}
+//   render() {
+//     return (
+//       <div>
+//         Hello React
+//       </div>
+//     )
+//   }
+// }
 
-ReactDom.render(<App />, document.getElementById('root'));
+// ReactDom.render(<App />, document.getElementById('root'));
 
 /**
  * tree shaking 

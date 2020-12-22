@@ -3,7 +3,6 @@ const path = require('path');
 const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { web } = require('webpack');
 
 const webpackCommonConfig = {
   // entry: ['@babel/polyfill', './src/index.js'],
@@ -105,6 +104,7 @@ const webpackCommonConfig = {
     ]
   },
   plugins: [
+    
     // 打包前 请理目录
     new CleanWebpackPlugin(
       {

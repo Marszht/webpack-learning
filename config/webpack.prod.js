@@ -17,7 +17,7 @@ const webpackConfig = {
           {
             loader:  MiniCssExtractPlugin.loader,
             options: {
-              publicPath: '/dist/style/'
+              publicPath: '/dist/style/', // 间接引入的文件
             }
           },
           {
@@ -84,37 +84,39 @@ const webpackConfig = {
     ]
   },
   plugins: [
+    // 一般用于 生产环境去打包分割css 文件
+    // 生产上一般用 style-loader 会吧 css 文件 引入到 index.html 文件上
     new MiniCssExtractPlugin({
       filename: 'style.css',
       chunkFilename: '[name].css'
     }),
-    new WorkboxPlugin.GenerateSW({
-      // these options encourage the ServiceWorkers to get in there fast
-      // and not allow any straggling "old" SWs to hang around
-      clientsClaim: true,
-      skipWaiting: true,
-    }),
+    // new WorkboxPlugin.GenerateSW({
+    //   // these options encourage the ServiceWorkers to get in there fast
+    //   // and not allow any straggling "old" SWs to hang around
+    //   clientsClaim: true,
+    //   skipWaiting: true,
+    // }),
     // new WorkboxPlugin.InjectManifest({
     //   swSrc: './src/index.js'
     // })
   ],
-  // optimization: {
-  //   usedExports: true,
-  //   minimizer: [
-  //     new CssMinimizerPlugin(),
-  //   ],
-  //   splitChunks: {
-  //     cacheGroups: {
-  //       styles: {
-  //         name: 'styles',
-  //         test: /\.(css|sass)$/,
-  //         chunks: 'all',
-  //         enforce: true,
-  //       },
-  //     },
-  //   },
+  optimization: {
+    usedExports: true,
+    minimizer: [
+      new CssMinimizerPlugin(),
+    ],
+    splitChunks: {
+      cacheGroups: {
+        styles: {
+          name: 'styles',
+          test: /\.(css|sass)$/,
+          chunks: 'all',
+          enforce: true,
+        },
+      },
+    },
 
-  // }
+  }
 }
 
 module.exports = merge(webpackConfig, commonWebpack);

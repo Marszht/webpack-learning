@@ -1,3 +1,4 @@
+@import 'avatar.scss';
 div:nth-of-type(odd) {
   /* background-color: aqureda; */
   /* background-color: red; */
