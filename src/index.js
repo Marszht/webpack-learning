@@ -60,26 +60,26 @@
 
 // css-loader 中已经 帮我们自己判断是否需要更新
 // HMR 
-import style from './index.scss';
+// import style from './index.scss';
 
-console.log({style});
-var btn = document.createElement('button');
-btn.innerHTML = '新建';
-document.body.appendChild(btn);
+// console.log({style});
+// var btn = document.createElement('button');
+// btn.innerHTML = '新建';
+// document.body.appendChild(btn);
 
-btn.onclick = function () {
-  var div = document.createElement('div');
-  div.classList.add(style.avatar);
-  div.innerHTML = 'item';
-  document.body.appendChild(div);
-}
+// btn.onclick = function () {
+//   var div = document.createElement('div');
+//   div.classList.add(style.avatar);
+//   div.innerHTML = 'item';
+//   document.body.appendChild(div);
+// }
 
-import { counter } from './conter';
-import { number } from './number';
+// import { counter } from './conter';
+// import { number } from './number';
 
 // 页面不会刷新，如果只是单纯的加上 HMR
-counter();
-number();
+// counter();
+// number();
 
 // // HMR 代码 在一般的框架中以及做好了 所以我们不需要写 & 判断
 // if (module.hot) {
@@ -168,19 +168,19 @@ number();
 
 //  使用 webpack插件进行拆分
 
-// function getComponent () {
-//   // 异步加载
-//   return import(/* webpackChunkName:"lodash"*/'lodash').then(({default: _}) => {
-//     var element = document.createElement('div');
-//     console.log(element);
-//     element.innerHTML = _.join(['mars', 'zht'], '-')
-//     return element;
-//   })
-// }
+function getComponent () {
+  // 异步加载
+  return import(/* webpackChunkName:"lodash"*/'lodash').then(({default: _}) => {
+    var element = document.createElement('div');
+    console.log(element);
+    element.innerHTML = _.join(['mars', 'zht'], '-')
+    return element;
+  })
+}
 
-// getComponent().then(element => {
-//   document.body.appendChild(element);
-// })
+getComponent().then(element => {
+  document.body.appendChild(element);
+})
 // 代码分割 和 webpack 无关
 
 // 1. 同步代码分割 // 在webpack 中 optimization
@@ -193,7 +193,8 @@ number();
  */
 // 让我们加载更快
 // function getComponent() {
-//   // 异步加载 import 
+//   // 异步加载 import 懒加载 
+// //  也可以用 async await 
 //   return import(/* webpackChunkName:"lodash"*/'lodash').then(({ default: _ }) => {
 //     var element = document.createElement('div');
 //     element.innerHTML = _.join(['mars', 'zht'], '-')
@@ -218,7 +219,7 @@ number();
 // 库代码
 // console.log("work");
 
-// PWA 渐进式网页应用
+// PWA 渐进式网页应用 
 // if ('serviceWorker' in navigator) {
 //   window.addEventListener('load', () => {
 //     navigator.serviceWorker.register('/service-worker.js')

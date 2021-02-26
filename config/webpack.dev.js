@@ -35,7 +35,7 @@ const webpackConfig = {
     port: 3000, // 默认 8080
     proxy: {
       '/react/api': {
-        target: 'http://www.dell-lee.com',
+        target: 'http://www.dell-lee.com', // 代理到这个服务器
         pathRewirte: {
           'header.json': 'demo.json'
         }
@@ -116,9 +116,10 @@ const webpackConfig = {
   ],
   // tree shakiing 生产不需要 这断代码
   optimization: {
-    usedExports: true,
+    usedExports: true,  // tree shaking
     splitChunks: {
       chunks: 'all', // async 只对异步代码有效 all 对 同步或者异步
+      // 以下是默认的
       minSize: 30000, // 如果引入的包 大于某个字节才会做代码分割 
       // minRemainingSize: 0,
       maxSize: 0, // 如果把 超过 很少会用

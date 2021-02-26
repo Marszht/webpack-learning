@@ -2,13 +2,16 @@ const commonWebpack = require('./webpack.config');
 const { merge } = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserPlugin = require("terser-webpack-plugin");
+
 // const WorkboxPlugin = require('workbox-webpack-plugin');
 
 
 const webpackConfig = {
   // 区分打包环境
   mode: 'production',
-  devtool: 'cheap-module-source-map', // production
+  // devtool: 'cheap-module-source-map', // production
+  devtool: 'none', // production
   module: {
     rules: [
       {
@@ -102,10 +105,15 @@ const webpackConfig = {
   ],
   optimization: {
     usedExports: true,
+    minimize: true,
     minimizer: [
       new CssMinimizerPlugin(),
+      // 如果需要空额压缩需要加上 terserPlugin ,一般只用于生产环境
+      // 如果是webpack5 则不需要加上 terser
+      // new TerserPlugin(),
     ],
     splitChunks: {
+      chunks: 'all',
       cacheGroups: {
         styles: {
           name: 'styles',
