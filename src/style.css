@@ -1,4 +1,5 @@
-@import 'avatar.scss';
+/* @import 'avatar.scss'; */
+/* @zhouJ: "./assets/LMY22301333226.jpg"; */
 div:nth-of-type(odd) {
   /* background-color: aqureda; */
   /* background-color: red; */
@@ -12,4 +13,5 @@ div:nth-of-type(odd) {
 }
 body {
   background-color: springgreen;
+  background-image: url("./assets/LMY22301333226.jpg");
 }

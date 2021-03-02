@@ -85,7 +85,7 @@ const webpackCommonConfig = {
           loader: 'url-loader',
           options: {
             // placerholder 占位符 [ext] [hash]
-            name: '[name].[ext].[hash]',
+            name: '[name].[hash].[ext]',
             outputPath: 'image',
             limit: 2048
           }

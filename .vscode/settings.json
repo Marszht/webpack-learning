@@ -1,0 +1,48 @@
+// TODO: 可以注意一下一些注释的，到时候拿出来讨论一下，看是否有这个需求
+{
+    "editor.tabSize": 2, // 空格
+    "px-to-rem.px-per-rem": 50, // j就是rem 转换的
+    "editor.codeActionsOnSave": {
+        // 文件保存的时候怎么处理，
+        "source.fixAll": false, // 如果为true 则适用所有安装的扩展
+        "source.fixAll.eslint": false, // 适用于 eslint 
+        "source.fixAll.stylelint": false
+    },
+    "eslint.workingDirectories": [
+        "back",
+        "front"
+    ],
+    // 不建议使用这种方式去格式化代码，可能考虑到有些后缀文件格式化之后非预期吧
+    // 但是我不接受它的建议
+    "editor.defaultFormatter": "esbenp.prettier-vscode", // 默认使用 prettier 规范代码
+    // Enable per-language
+    "editor.formatOnSave": true,
+    "[javascript]": {
+        // 单独为某个语言设置 默认的规则
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    // "editor.formatOnPaste": true, //复制过来的格式化
+    // "editor.formatOnSaveMode": "modifications", // 只格式化改动的地方 ？？ 可以讨论一下
+    "editor.formatOnType": true,
+    // "editor.minimap.size": "fill", // 这个是右边的缩略图
+    "editor.minimap.maxColumn": 70, // 缩略图的宽度
+    // 都可以用 stylelint 的配置来处理 ，不需要本地setting 处理
+    // "less.lint.argumentsInColorFunction": "warning",
+    // "less.lint.duplicateProperties": "warning",
+    // "less.lint.float": "warning",
+    // "less.lint.ieHack": "warning",
+    // "less.lint.idSelector": "warning",
+    // "less.lint.important": "warning",
+    // "less.lint.importStatement": "warning",
+    // "less.lint.universalSelector": "warning",
+    "stylelint.enable": true,
+    "css.validate": false,
+    "less.validate": false,
+    "scss.validate": false,
+    "js/ts.implicitProjectConfig.experimentalDecorators": true
+}

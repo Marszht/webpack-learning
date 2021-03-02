@@ -12,7 +12,7 @@
 // import Content from './content';
 // import SiderBar from './siderBar';
 // import createAvatar from './createAvatar';
-// import zhouJ from './assets/LMY22301333226.jpg';
+import zhouJ from './assets/LMY22301333226.jpg';
 // const ZhouJ = require('./assets/LMY22301333226.jpg')
 // const avatar = require('./assets/avatar.jpg')
 // const pushUp = require('./assets/pushUp.jpg')
@@ -21,8 +21,9 @@
 
 // // 会造成这个样式全局引用 所以引出 css-module
 
-// import style from "./index.scss";
-// console.log({style})
+import style from "./index.scss";
+// import "./style.css";
+console.log({style})
 // const img = new Image();
 // img.src = zhouJ;
 // img.classList.add(style.avatar);
@@ -145,9 +146,11 @@
  * tree shaking 
  */
 // tree shaking 去除不需要的 引入
+// 需要配合 sideEffects
+// 以及 压缩 treser
 // 只支持 es module的引入 只支持静态引入
-// import { add } from './math';
-// console.log(add(1,4));
+import { add } from './math';
+console.log(add(1,4));
 
 /**
  * code splitting 代码分割
@@ -168,19 +171,19 @@
 
 //  使用 webpack插件进行拆分
 
-function getComponent () {
-  // 异步加载
-  return import(/* webpackChunkName:"lodash"*/'lodash').then(({default: _}) => {
-    var element = document.createElement('div');
-    console.log(element);
-    element.innerHTML = _.join(['mars', 'zht'], '-')
-    return element;
-  })
-}
+// function getComponent () {
+//   // 异步加载
+//   return import(/* webpackChunkName:"lodash"*/'lodash').then(({default: _}) => {
+//     var element = document.createElement('div');
+//     console.log(element);
+//     element.innerHTML = _.join(['mars', 'zht'], '-')
+//     return element;
+//   })
+// }
 
-getComponent().then(element => {
-  document.body.appendChild(element);
-})
+// getComponent().then(element => {
+//   document.body.appendChild(element);
+// })
 // 代码分割 和 webpack 无关
 
 // 1. 同步代码分割 // 在webpack 中 optimization
