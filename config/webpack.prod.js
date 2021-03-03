@@ -99,7 +99,7 @@ const webpackConfig = {
     // })
   ],
   optimization: {
-    usedExports: true,
+    usedExports: false, //
     minimize: true,
     minimizer: [
       new CssMinimizerPlugin(),
