@@ -8,8 +8,8 @@ const TerserPlugin = require("terser-webpack-plugin");
 
 const webpackConfig = {
   // 区分打包环境
-  mode: "development",
-  // mode: 'production',
+  // mode: "development",
+  mode: "production",
   // devtool: 'cheap-module-source-map', // production
   devtool: "none", // production
   module: {
@@ -99,7 +99,7 @@ const webpackConfig = {
     // })
   ],
   optimization: {
-    usedExports: false, //
+    usedExports: true, //
     minimize: true,
     minimizer: [
       new CssMinimizerPlugin(),
@@ -109,7 +109,7 @@ const webpackConfig = {
       // source-map不能用 eval 因为 minimizer 不能处理字符串
       // 也不能用 cheap 因为cheap 会有列信息，但是 terser 会压缩成一行
       new TerserPlugin({
-        extractComments: true, // 提取注释
+        // extractComments: true, // 提取注释 默认false 如果不要 会把注释删除
         // terserOptions: {
         // }
       }),

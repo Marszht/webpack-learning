@@ -20,12 +20,12 @@ import zhouJ from "./assets/LMY22301333226.jpg";
 import style from "./index.scss";
 // import "./style.css";
 console.log({ style });
-// const img = new Image();
-// img.src = zhouJ;
-// img.classList.add(style.avatar);
-// // img.classList.add("avatar");
-// const root = document.getElementById('root');
-// root.appendChild(img);
+const img = new Image();
+img.src = zhouJ;
+img.classList.add(style.avatar);
+// img.classList.add("avatar");
+const root = document.getElementById("root");
+root.appendChild(img);
 
 // // 打包图片 以及 css 的打包
 // // 其中主要包括  url-loader file-loader
@@ -141,8 +141,8 @@ console.log({ style });
 // 以及 压缩 treser
 // 还有字段 usedExports： true当值为true 之后再通过 terser 压缩 会把 没有使用的给删除掉
 // 只支持 es module的引入 只支持静态引入
-import { add } from "./math";
-console.log(add(1, 4));
+// import { add } from "./math";
+// console.log(add(1, 4));
 
 /**
  * code splitting 代码分割
@@ -151,7 +151,7 @@ console.log(add(1, 4));
 // import _ from "lodash";
 
 // 业务逻辑 1MB
-// console.log(_.join(['a', 'b', 'c']));
+// console.log(_.join(["a", "b", "c"]));
 
 // main.js  2MB
 
@@ -163,19 +163,21 @@ console.log(add(1, 4));
 
 //  使用 webpack插件进行拆分
 
-// function getComponent () {
-//   // 异步加载
-//   return import(/* webpackChunkName:"lodash"*/'lodash').then(({default: _}) => {
-//     var element = document.createElement('div');
-//     console.log(element);
-//     element.innerHTML = _.join(['mars', 'zht'], '-')
-//     return element;
-//   })
-// }
+function getComponent() {
+  // 异步加载
+  return import(/* webpackChunkName:"lodash"*/ "lodash").then(
+    ({ default: _ }) => {
+      var element = document.createElement("div");
+      console.log(element);
+      element.innerHTML = _.join(["mars", "zht"], "-");
+      return element;
+    }
+  );
+}
 
-// getComponent().then(element => {
-//   document.body.appendChild(element);
-// })
+getComponent().then((element) => {
+  document.body.appendChild(element);
+});
 // 代码分割 和 webpack 无关
 
 // 1. 同步代码分割 // 在webpack 中 optimization
@@ -188,18 +190,29 @@ console.log(add(1, 4));
 // 让我们加载更快
 // function getComponent() {
 //   // 异步加载 import 懒加载
-// //  也可以用 async await
-//   return import(/* webpackChunkName:"lodash"*/'lodash').then(({ default: _ }) => {
-//     var element = document.createElement('div');
-//     element.innerHTML = _.join(['mars', 'zht'], '-')
-//     return element;
-//   })
+//   //  也可以用 async await
+//   return import(/* webpackChunkName:"lodash"*/ "lodash").then(
+//     ({ default: _ }) => {
+//       var element = document.createElement("div");
+//       element.innerHTML = _.join(["mars", "zht"], "-");
+//       return element;
+//     }
+//   );
 // }
-// document.addEventListener('click', () => {
-//   getComponent().then(element => {
+
+// 使用 async await 简化代码
+// async function getComponent() {
+//   const { default: _ } = await import(/* webpackChunkName:"lodash"*/ "lodash");
+//   var element = document.createElement("div");
+//   element.innerHTML = _.join(["mars", "zht"], "-");
+//   return element;
+// }
+
+// document.addEventListener("click", () => {
+//   getComponent().then((element) => {
 //     document.body.appendChild(element);
-//   })
-// })
+//   });
+// });
 
 // // Chunk 项目打包完后dist 目录下有几个js 文件
 // var fuck = [1,2,3]
