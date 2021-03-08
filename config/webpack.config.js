@@ -24,6 +24,7 @@ const webpackCommonConfig = {
   },
   resolve: {
     extensions: [".js", ".jsx", ".mjs", ".json"],
+    mainFiles: ["index", "other"], // 如果是文件夹 则会按照数组种的顺序去默认引入。 默认 index
   },
   module: {
     // 遇到文件的时候该怎么处理

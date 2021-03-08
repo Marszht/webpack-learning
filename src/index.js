@@ -94,13 +94,14 @@
 // })
 
 import React, { PureComponent } from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Link, Router, Switch } from "react-router-dom";
 import Home from "./components/home";
 import List from "./components/list";
 import { Button, DatePicker } from "antd";
 import ReactDom from "react-dom";
 import axios from "axios";
 import "antd/dist/antd.css";
+import "./index.scss";
 
 // import "./style.css";
 
@@ -128,13 +129,27 @@ class App extends PureComponent {
   //   })
   // }
   render() {
-    return (
-      // <div>hhh</div>
-      <BrowserRouter>
-        <Route path="/" exact component={Home} />
-        <Route path="/list" component={List} />
-      </BrowserRouter>
-    );
+    return [
+      <Button key="btn" type="primary">
+        测试button
+      </Button>,
+      <BrowserRouter key="router">
+        <li className="route">
+          <Link to="/" key="/">
+            Home
+          </Link>
+        </li>
+        <li>
+          <Link to="/list" key="about">
+            About
+          </Link>
+        </li>
+        <Switch key="BrowserRouter">
+          <Route path="/" exact component={Home} />
+          <Route path="/list" component={List} />
+        </Switch>
+      </BrowserRouter>,
+    ];
   }
 }
 

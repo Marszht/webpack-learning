@@ -60,7 +60,7 @@ const webpackConfig = {
             options: {
               // 就是在文件 css 文件中引入的 可能不会执行
               // sass-loader postcss-loader
-              modules: true, // 开启模块化打包
+              // modules: true, // 开启模块化打包
               importLoaders: 2, // 表示 在 css中import 的css会使用 scss 和 postcss-loader
               //   // 使用 模块 用 css-module
             },
@@ -86,7 +86,8 @@ const webpackConfig = {
             options: {
               // 就是在文件 css 文件中引入的 可能不会执行
               // sass-loader postcss-loader
-              modules: true, // 开启模块化打包
+              // 开启模块化打包 也就是把 css 文件 导出为一个对象，或者单独导出一个值
+              // modules: true,
               importLoaders: 2, // 表示 在 css中import 的css会使用 scss 和 postcss-loader
               //   // 使用 模块 用 css-module
             },
@@ -110,46 +111,46 @@ const webpackConfig = {
     new webpack.HotModuleReplacementPlugin(), // HMR
   ],
   // tree shakiing 开发不需要 这断代码
-  // optimization: {
-  //   // runtimeChunk: "single",
-  //   // usedExports: true,  // tree shaking
-  //   splitChunks: {
-  //     chunks: "async", // async 只对异步代码有效 all 对 同步或者异步
-  //     //   // 以下是默认的
-  //     //   minSize: 30000, // 如果引入的包 大于某个字节才会做代码分割
-  //     //   // minRemainingSize: 0,
-  //     //   maxSize: 0, // 如果把 超过 很少会用
-  //     //   minChunks: 1, //  当一个模块被用了多少次才会去打包
-  //     //   maxAsyncRequests: 30, // 同时加载的模块数 超过30 个不再做代码分割
-  //     //   maxInitialRequests: 30, // 入口文件最多只能30 个
-  //     //   automaticNameDelimiter: '~', // 文件中间的分割符号
-  //     //   enforceSizeThreshold: 50000,
-  //     //   name: true,
-  //     // 同步代码有效 cacheFroup
-  //     // cacheGroups: { // 缓存组
-  //     //   // vendors: false,
-  //     //   // default: false
-  //     //   defaultVendors: {
-  //     //     test: /[\\/]node_modules[\\/]/,
-  //     //     priority: -10,  // 优先级 跟default 的区别
-  //     //     filename: 'venders.js',
-  //     //     // publicPath
-  //     //     reuseExistingChunk: true // 复用之前被打包过的模块
-  //     //   },
-  //     //   default: {
-  //     //     minChunks: 2,
-  //     //     priority: -20,
-  //     //     reuseExistingChunk: true
-  //     //   }
-  //     // }
-  //     // 可以再去看详细 配置
-  //     // chunks: 'all',
-  //     // cacheGroups: {
-  //     //   venders: false,
-  //     //   default: false
-  //     // }
-  //   },
-  // },
+  optimization: {
+    // runtimeChunk: "single",
+    usedExports: true, // tree shaking
+    splitChunks: {
+      chunks: "all", // async 只对异步代码有效 all 对 同步或者异步
+      //   // 以下是默认的
+      //   minSize: 30000, // 如果引入的包 大于某个字节才会做代码分割
+      //   // minRemainingSize: 0,
+      //   maxSize: 0, // 如果把 超过 很少会用
+      //   minChunks: 1, //  当一个模块被用了多少次才会去打包
+      //   maxAsyncRequests: 30, // 同时加载的模块数 超过30 个不再做代码分割
+      //   maxInitialRequests: 30, // 入口文件最多只能30 个
+      //   automaticNameDelimiter: '~', // 文件中间的分割符号
+      //   enforceSizeThreshold: 50000,
+      //   name: true,
+      // 同步代码有效 cacheFroup
+      // cacheGroups: { // 缓存组
+      //   // vendors: false,
+      //   // default: false
+      //   defaultVendors: {
+      //     test: /[\\/]node_modules[\\/]/,
+      //     priority: -10,  // 优先级 跟default 的区别
+      //     filename: 'venders.js',
+      //     // publicPath
+      //     reuseExistingChunk: true // 复用之前被打包过的模块
+      //   },
+      //   default: {
+      //     minChunks: 2,
+      //     priority: -20,
+      //     reuseExistingChunk: true
+      //   }
+      // }
+      // 可以再去看详细 配置
+      // chunks: 'all',
+      // cacheGroups: {
+      //   venders: false,
+      //   default: false
+      // }
+    },
+  },
 };
 
 // module.exports = smp.wrap(webpackConfig);
