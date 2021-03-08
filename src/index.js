@@ -95,10 +95,14 @@
 
 import React, { PureComponent } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
-import ReactDom from "react-dom";
-import axios from "axios";
 import Home from "./components/home";
 import List from "./components/list";
+import { Button, DatePicker } from "antd";
+import ReactDom from "react-dom";
+import axios from "axios";
+import "antd/dist/antd.css";
+
+// import "./style.css";
 
 class App extends PureComponent {
   constructor() {

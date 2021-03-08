@@ -48,7 +48,7 @@ const webpackConfig = {
   module: {
     rules: [
       {
-        test: /\.(sass|scss)$/i,
+        test: /\.(sass|scss|less)$/i,
         //  会从use 数组最后一个开始解析
         use: [
           // 把解析出来的 css 插入DOM 结构
@@ -109,7 +109,7 @@ const webpackConfig = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(), // HMR
   ],
-  // tree shakiing 生产不需要 这断代码
+  // tree shakiing 开发不需要 这断代码
   // optimization: {
   //   // runtimeChunk: "single",
   //   // usedExports: true,  // tree shaking
