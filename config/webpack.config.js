@@ -3,6 +3,8 @@ const path = require("path");
 const webpack = require("webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+  .BundleAnalyzerPlugin;
 
 const webpackCommonConfig = {
   // entry: ['@babel/polyfill', './src/index.js'],
@@ -116,6 +118,8 @@ const webpackCommonConfig = {
     ],
   },
   plugins: [
+    // 分析bundle 的相关依赖以及大小
+    new BundleAnalyzerPlugin(),
     // 打包前 请理目录
     new CleanWebpackPlugin({
       verbose: true,

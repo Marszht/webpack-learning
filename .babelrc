@@ -1,6 +1,7 @@
 {
   "presets": [
-    ["@babel/preset-env",
+    [
+      "@babel/preset-env",
       {
         "useBuiltIns": "usage",
         "corejs": 2
@@ -8,5 +9,16 @@
     ],
     "@babel/preset-react"
   ],
-  "plugins": ["@babel/plugin-syntax-dynamic-import"]
+  "plugins": [
+    "@babel/plugin-syntax-dynamic-import",
+    [
+      "import",
+      {
+        "libraryName": "antd",
+        "libraryDirectory": "es",
+        "style": "css"
+      },
+      "antd"
+    ]
+  ]
 }

@@ -17,15 +17,15 @@ import zhouJ from "./assets/LMY22301333226.jpg";
 
 // // 会造成这个样式全局引用 所以引出 css-module
 
-import style from "./index.scss";
-// import "./style.css";
-console.log({ style });
-const img = new Image();
-img.src = zhouJ;
-img.classList.add(style.avatar);
-// img.classList.add("avatar");
-const root = document.getElementById("root");
-root.appendChild(img);
+// import style from "./index.scss";
+// // import "./style.css";
+// console.log({ style });
+// const img = new Image();
+// img.src = zhouJ;
+// img.classList.add(style.avatar);
+// // img.classList.add("avatar");
+// const root = document.getElementById("root");
+// root.appendChild(img);
 
 // // 打包图片 以及 css 的打包
 // // 其中主要包括  url-loader file-loader
@@ -93,45 +93,40 @@ root.appendChild(img);
 //   console.log({ item })
 // })
 
-// import React, { PureComponent } from 'react';
+import React, { PureComponent } from "react";
+import { Button, DatePicker } from "antd";
+import ReactDom from "react-dom";
+import axios from "axios";
+import "antd/dist/antd.css";
 
-// import ReactDom from 'react-dom';
-// import axios from 'axios';
+// import "./style.css";
 
-// class App extends PureComponent {
-//   constructor () {
-//     super();
-//     this.state = {
-//       num:19
-//     }
-//   }
+class App extends PureComponent {
+  constructor() {
+    super();
+    this.state = {
+      num: 19,
+    };
+  }
 
-// componentDidMount() {
-//   // 允许了跨域
-//   // 本地代理服务器 fideler 待会尝试一下
-//   axios.get('/react/api/header.json')
-//   .then(res => {
-//     console.log({res});
-//   })
-// }
+  componentDidMount() {
+    // 允许了跨域
+    // 本地代理服务器 fideler 待会尝试一下
+    axios.get("/react/api/header.json").then((res) => {
+      console.log({ res });
+    });
+  }
+  render() {
+    return (
+      <div>
+        <Button type="primary">Hello React</Button>
+        <DatePicker placeholder="select date" />
+      </div>
+    );
+  }
+}
 
-// onClick = () => {
-
-//   const { num } = this.state;
-//   this.setState({
-//     num: num++
-//   })
-// }
-//   render() {
-//     return (
-//       <div>
-//         Hello React
-//       </div>
-//     )
-//   }
-// }
-
-// ReactDom.render(<App />, document.getElementById('root'));
+ReactDom.render(<App />, document.getElementById("root"));
 
 /**
  * tree shaking
@@ -163,21 +158,21 @@ root.appendChild(img);
 
 //  使用 webpack插件进行拆分
 
-function getComponent() {
-  // 异步加载
-  return import(/* webpackChunkName:"lodash"*/ "lodash").then(
-    ({ default: _ }) => {
-      var element = document.createElement("div");
-      console.log(element);
-      element.innerHTML = _.join(["mars", "zht"], "-");
-      return element;
-    }
-  );
-}
+// function getComponent() {
+//   // 异步加载
+//   return import(/* webpackChunkName:"lodash"*/ "lodash").then(
+//     ({ default: _ }) => {
+//       var element = document.createElement("div");
+//       console.log(element);
+//       element.innerHTML = _.join(["mars", "zht"], "-");
+//       return element;
+//     }
+//   );
+// }
 
-getComponent().then((element) => {
-  document.body.appendChild(element);
-});
+// getComponent().then((element) => {
+//   document.body.appendChild(element);
+// });
 // 代码分割 和 webpack 无关
 
 // 1. 同步代码分割 // 在webpack 中 optimization
