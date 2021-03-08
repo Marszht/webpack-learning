@@ -20,6 +20,9 @@ const webpackCommonConfig = {
     // vendor: path.resolve(__dirname, "../src/math.js"), // 这个路径注意，不是在根目录，所以会一直有问题
     main: "./src/index.js",
   },
+  resolve: {
+    extensions: [".js", ".jsx", ".mjs", ".json"],
+  },
   module: {
     // 遇到文件的时候该怎么处理
     rules: [
@@ -49,7 +52,7 @@ const webpackCommonConfig = {
       //   },
       // },
       {
-        test: /\.m?js$/,
+        test: /\.m?js[x]?$/,
         exclude: /node_modules/,
         // include
         use: [

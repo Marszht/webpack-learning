@@ -43,6 +43,7 @@ const webpackConfig = {
     // HMR 只会刷新 你更改的内容
     hot: true, // 自动刷新 开启 HMR
     hotOnly: true, // 不自动 刷新 当 hmr 失效的时候 做特别处理
+    historyApiFallback: true, // 单页spa 中会有默认的 路径
   },
   module: {
     rules: [
