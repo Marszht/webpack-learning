@@ -109,12 +109,13 @@ class App extends PureComponent {
   constructor() {
     super();
     this.state = {
-      num: 19,
+      num: 10,
     };
   }
 
   componentDidMount() {
     // 允许了跨域
+    console.log("asda");
     // 本地代理服务器 fideler 待会尝试一下
     axios.get("/react/api/header.json").then((res) => {
       console.log({ res });
@@ -131,17 +132,9 @@ class App extends PureComponent {
   render() {
     return [
       <BrowserRouter key="router">
-        {/* <li className="route">
-          <Link to="/" key="/">
-            Home
-          </Link>
-        </li>
-        <li>
-          <Link to="/list" key="about">
-            About
-          </Link>
-        </li> */}
         <Switch key="BrowserRouter">
+          <Route path="/" exact component={Home} />
+          <Route path="/list" component={List} />
           <Route path="/" exact component={Home} />
           <Route path="/list" component={List} />
         </Switch>
