@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import { Button, DatePicker } from "antd";
+import { Link } from "react-router-dom";
 import _ from "lodash";
+import "./components.scss";
 
-export default class home extends Component {
+export default class list extends Component {
   render() {
     return (
-      <div>
-        <Button type="primary">ListPage</Button>
-        {_.join(["1", "2"])}
+      <div className="router">
+        <Link to="/">ListPage</Link>
       </div>
     );
   }

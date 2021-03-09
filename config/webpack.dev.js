@@ -117,32 +117,39 @@ const webpackConfig = {
     splitChunks: {
       chunks: "all", // async 只对异步代码有效 all 对 同步或者异步
       //   // 以下是默认的
-      //   minSize: 30000, // 如果引入的包 大于某个字节才会做代码分割
+      // minSize: 20000, // 如果引入的包 大于某个字节才会做代码分割
       //   // minRemainingSize: 0,
       //   maxSize: 0, // 如果把 超过 很少会用
-      //   minChunks: 1, //  当一个模块被用了多少次才会去打包
+      minChunks: 1, //  当一个模块被用了多少次才会去打包
       //   maxAsyncRequests: 30, // 同时加载的模块数 超过30 个不再做代码分割
-      //   maxInitialRequests: 30, // 入口文件最多只能30 个
-      //   automaticNameDelimiter: '~', // 文件中间的分割符号
+      //   maxInitialRequests: 30, // 入口文件最大并行请求数量30
+      automaticNameDelimiter: "_", // 文件中间的分割符号
       //   enforceSizeThreshold: 50000,
       //   name: true,
       // 同步代码有效 cacheFroup
-      // cacheGroups: { // 缓存组
-      //   // vendors: false,
-      //   // default: false
-      //   defaultVendors: {
-      //     test: /[\\/]node_modules[\\/]/,
-      //     priority: -10,  // 优先级 跟default 的区别
-      //     filename: 'venders.js',
-      //     // publicPath
-      //     reuseExistingChunk: true // 复用之前被打包过的模块
-      //   },
-      //   default: {
-      //     minChunks: 2,
-      //     priority: -20,
-      //     reuseExistingChunk: true
-      //   }
-      // }
+      cacheGroups: {
+        // 缓存组
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: "commons",
+          chunks: "all",
+          minChunks: 2,
+        },
+        // vendors: false,
+        // default: false
+        // defaultVendors: {
+        //   test: /[\\/]node_modules[\\/]/,
+        //   priority: -10,  // 优先级 跟default 的区别
+        //   filename: 'venders.js',
+        //   // publicPath
+        //   reuseExistingChunk: true // 复用之前被打包过的模块
+        // },
+        // default: {
+        //   minChunks: 2,
+        //   priority: -20,
+        //   reuseExistingChunk: true
+        // }
+      },
       // 可以再去看详细 配置
       // chunks: 'all',
       // cacheGroups: {

@@ -1,8 +1,14 @@
 import React, { Component } from "react";
 import _ from "lodash";
+import { Link } from "react-router-dom";
+import "./components.scss";
 
 export default class home extends Component {
   render() {
-    return <div>HomePage {_.join(["1", "3"])}</div>;
+    return (
+      <div className="router">
+        <Link to="/list">HomePage</Link>
+      </div>
+    );
   }
 }

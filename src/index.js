@@ -130,11 +130,8 @@ class App extends PureComponent {
   // }
   render() {
     return [
-      <Button key="btn" type="primary">
-        测试button
-      </Button>,
       <BrowserRouter key="router">
-        <li className="route">
+        {/* <li className="route">
           <Link to="/" key="/">
             Home
           </Link>
@@ -143,7 +140,7 @@ class App extends PureComponent {
           <Link to="/list" key="about">
             About
           </Link>
-        </li>
+        </li> */}
         <Switch key="BrowserRouter">
           <Route path="/" exact component={Home} />
           <Route path="/list" component={List} />
