@@ -31,12 +31,19 @@ const webpackConfig = {
   devServer: {
     contentBase: "./dist", // 启动在哪个文件夹下
     open: true, //  自动 开启浏览器 开启 服务器 如果以文件地址打开会有跨域问题， 或者发ajax 请求
+    openPage: "list",
     port: 3000, // 默认 8080
+    overlay: {
+      // 出现编译错误或者警告时，在浏览器全屏覆盖
+      warnings: true,
+      errors: true,
+    },
     headers: {
       fuckingawsome: "hah",
     },
     // http2: true,
     // https: true,
+    // 对于跨域可以使用这个字段，让后端服务跑在localHost 上
     proxy: {
       "/react/api": {
         target: "http://www.dell-lee.com", // 代理到这个服务器
@@ -49,7 +56,7 @@ const webpackConfig = {
     // hot: true, // 自动刷新 开启 HMR
     // hotOnly: true, // 不自动 刷新 当 hmr 失效的时候 做特别处理， 无需页面刷新作为构建失败的回退
     // 这个就没有 HMR 的优势了， 但对于某些情况可能适用
-    liveReload: true, // 当检测到文件更改时， 重新刷新浏览器,但是必须把hot 设置为false,
+    // liveReload: true, // 当检测到文件更改时， 重新刷新浏览器,但是必须把hot 设置为false,
     historyApiFallback: true, // 单页spa 中会有默认的 路径, 如果设置为false 则当所有响应都不会为index.html 内容
     index: "a.html", // 配合historyApiFallback 使用
   },

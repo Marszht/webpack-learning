@@ -93,6 +93,19 @@
 //   console.log({ item })
 // })
 
+function fun() {
+  if (false) {
+    console.log("true");
+  } else {
+    const a = "a";
+    if (a) {
+      console.log("false");
+      return false;
+    }
+  }
+  console.log("aa");
+}
+fun();
 import React, { PureComponent } from "react";
 import { BrowserRouter, Route, Link, Router, Switch } from "react-router-dom";
 import Home from "./components/home";
