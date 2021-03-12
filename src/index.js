@@ -92,20 +92,6 @@
 // arr.map(item => {
 //   console.log({ item })
 // })
-
-function fun() {
-  if (false) {
-    console.log("true");
-  } else {
-    const a = "a";
-    if (a) {
-      console.log("false");
-      return false;
-    }
-  }
-  console.log("aa");
-}
-fun();
 import React, { PureComponent } from "react";
 import { BrowserRouter, Route, Link, Router, Switch } from "react-router-dom";
 import Home from "./components/home";
@@ -182,7 +168,8 @@ ReactDom.render(<App />, document.getElementById("root"));
 
 // 打包文件会很大，加载时间会很长
 
-// 用户重新访问 页面，又会重新加载2MB 内容
+// 用户重新访问 页面，又会重新加载2MB 内容，
+// 对于一些依赖库进行长缓存， 之后再访问 就不会更新
 
 // 对代码共用部分进行拆分 code-spliting
 
@@ -209,8 +196,9 @@ ReactDom.render(<App />, document.getElementById("root"));
 // 2.异步代码，无需做任何配置
 
 /**
- * 懒加载 Lazy Loading
- * Chunk 是什么
+ * 懒加载 Lazy Loading 用户交互之后再去请求相应的资源， 异步的加载一个模块
+ * Chunk 是什么 ? 项目中打包后的js 文件 就是一个个chunk
+ * useBuiltin: true babel 里面设置
  */
 // 让我们加载更快
 // function getComponent() {

@@ -20,6 +20,7 @@ const webpackCommonConfig = {
     // // },
     // shared: "lodash",
     // vendor: path.resolve(__dirname, "../src/math.js"), // 这个路径注意，不是在根目录，所以会一直有问题
+    // lodash: "./src/lodash.js",  // 主动分割一些代码 lodash 基础库 自己动手， 可以用智能的代码分割
     main: "./src/index.js",
   },
   resolve: {
@@ -143,7 +144,7 @@ const webpackCommonConfig = {
   output: {
     // publicPath: '/', // cdn 地址放到对应
     path: path.resolve(__dirname, "../dist"),
-    chunkFilename: "[name].chunk.js", // 间接引入的模块
+    chunkFilename: "[name].[contenthash].js", // 间接引入的模块
     filename: "[name].js", // 多个entry
   },
 };

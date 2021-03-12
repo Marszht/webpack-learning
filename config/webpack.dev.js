@@ -132,45 +132,69 @@ const webpackConfig = {
     splitChunks: {
       chunks: "all", // async 只对异步代码有效 all 对 同步或者异步
       //   // 以下是默认的
-      // minSize: 20000, // 如果引入的包 大于某个字节才会做代码分割
+      minSize: 0, // 如果引入的包 大于某个字节才会做代码分割 B字节/KB千字节 kb千位 / b位
       //   // minRemainingSize: 0,
-      //   maxSize: 0, // 如果把 超过 很少会用
+      maxSize: 0, // 一般很少会配置 默认为 0 就是不对大小进行二次分割
       minChunks: 1, //  当一个模块被用了多少次才会去打包
-      //   maxAsyncRequests: 30, // 同时加载的模块数 超过30 个不再做代码分割
-      //   maxInitialRequests: 30, // 入口文件最大并行请求数量30
-      automaticNameDelimiter: "_", // 文件中间的分割符号
+      maxAsyncRequests: 30, // 同时加载的模块数 超过30 个不再做代码分割
+      maxInitialRequests: 30, // 入口文件最大并行请求数量30 网站首页
+      automaticNameDelimiter: "_", // 文件中间的分割符号, 作为文件名的链接
       //   enforceSizeThreshold: 50000,
-      //   name: true,
-      // 同步代码有效 cacheFroup
+      name: true, // 让cacheGroup 中的名字有效
+      // 同步代码有效 cacheGroup
+      // 如果匹配到了多个 缓存组则会按照优先级来
       cacheGroups: {
         // 缓存组
-        commons: {
-          test: /[\\/]node_modules[\\/]/,
-          name: "commons",
-          chunks: "all",
-          minChunks: 2,
-        },
-        // vendors: false,
-        // default: false
-        // defaultVendors: {
+        // commons: {
         //   test: /[\\/]node_modules[\\/]/,
-        //   priority: -10,  // 优先级 跟default 的区别
-        //   filename: 'venders.js',
-        //   // publicPath
-        //   reuseExistingChunk: true // 复用之前被打包过的模块
+        //   // node_modules/react-dom/
+        //   // node_modules/react/
+        //   // node_modules/react-redux/
+        //   name: "commons",
+        //   chunks: "all",
+        //   minChunks: 1,
         // },
-        // default: {
-        //   minChunks: 2,
-        //   priority: -20,
-        //   reuseExistingChunk: true
-        // }
+        // vendors: false,
+        // default: false,
+        vendors: {
+          test: /[\\/]node_modules[\\/]/, // 适用于 [\\/] windows、 unix
+          priority: -10, // 优先级 跟default 的区别
+          filename: "venders.js",
+        },
+        lodash: {
+          test: /[\\/]node_modules[\\/]lodash[\\/]/,
+          priority: -10,
+          filename: "lodash.js",
+        },
+        antd: {
+          test: /[\\/]node_modules[\\/]antd[\\/]/,
+          priority: -10,
+          filename: "antd.js",
+        },
+        // defaultVendors: {
+        //   // 这个 vender 组， 可能还有其他的文件这个组里面
+        //   // 如果设置为false 则不会去打包
+        //   test: /[\\/]node_modules[\\/]/, // 适用于 [\\/] windows、 unix
+        //   priority: -10, // 优先级 跟default 的区别
+        //   filename: "venders.js",
+        //   // publicPath
+        //   reuseExistingChunk: true, // 复用之前被打包过的模块
+        // },
+        // commpents: {
+        //   minChunks: 1,
+        //   test: /[\\/]src[\\/]components[\\/]/,
+        //   priority: -10,
+        //   reuseExistingChunk: true, // 复用之前被打包过的模块
+        //   filename: "commpents.[contenthash].js",
+        // },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true, // 复用之前被打包过的模块
+          filename: "common.js",
+        },
+        // },
       },
-      // 可以再去看详细 配置
-      // chunks: 'all',
-      // cacheGroups: {
-      //   venders: false,
-      //   default: false
-      // }
     },
   },
 };

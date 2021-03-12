@@ -1,6 +1,6 @@
-// import _ from "lodash";
+import _ from "lodash";
 export const add = (a, b) => {
-  return a + b;
+  return _.join([a, b]);
 };
 
 export const minus = (a, b) => {
@@ -19,6 +19,15 @@ export function number() {
   };
   document.body.appendChild(div);
 }
-module.exports = {
-  number,
-};
+
+import style from "../avatar.scss";
+
+console.log({ style });
+
+export function createAvatar() {
+  const img = new Image();
+  img.src = "zhouJ";
+  img.classList.add(style.avatar);
+  const root = document.getElementById("root");
+  root.appendChild(img);
+}

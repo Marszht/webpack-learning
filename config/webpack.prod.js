@@ -108,21 +108,26 @@ const webpackConfig = {
       // 使用注意点 ：
       // source-map不能用 eval 因为 minimizer 不能处理字符串
       // 也不能用 cheap 因为cheap 会有列信息，但是 terser 会压缩成一行
-      new TerserPlugin({
-        // extractComments: true, // 提取注释 默认false 如果不要 会把注释删除
-        // terserOptions: {
-        // }
-      }),
+      // new TerserPlugin({
+      //   // extractComments: true, // 提取注释 默认false 如果不要 会把注释删除
+      //   // terserOptions: {
+      //   // }
+      // }),
     ],
     splitChunks: {
       chunks: "all",
       cacheGroups: {
-        styles: {
-          name: "kidding",
-          test: /\.(css|sass)$/,
+        vendors: {
+          name: "vendor",
+          test: /[\\/]node_modules[\\/]/,
           chunks: "all",
-          enforce: true,
         },
+        // styles: {
+        //   name: "[hash8]",
+        //   test: /\.(css|sass)$/,
+        //   chunks: "all",
+        //   enforce: true,
+        // },
       },
     },
   },
